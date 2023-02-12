@@ -13,6 +13,7 @@ import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const pages = [
+  { key: 1, routeName: "Home", routerLink: "/home" },
   { key: 2, routeName: "Upload", routerLink: "/upload" },
   { key: 3, routeName: "Employees", routerLink: "/employees" },
   { key: 4, routeName: "Login", routerLink: "/login" },
@@ -37,7 +38,7 @@ const HeaderAppBar = () => {
           <Typography
             variant="h6"
             noWrap
-            to={"/Login"}
+            to={"/home"}
             component={Link}
             sx={{
               mr: 2,

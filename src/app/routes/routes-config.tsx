@@ -1,15 +1,25 @@
 import { nanoid } from "nanoid";
 
 import { lazy } from "react";
-import ProtectedRoute from "./protected-route";
+
 import appRoutes from "./routes";
+import UnknowRoute from "./protect-route/unknown-route";
 
 const MainApp = lazy(() => import("../../components/main/main"));
-const EmployeesLandingPage = lazy(() => import("../../features/employees/Employees"));
+const EmployeesLandingPage = lazy(
+  () => import("../../features/employees/Employees")
+);
 const LoginLandingPage = lazy(() => import("../../features/login/Login"));
 const UploadLandingPage = lazy(() => import("../../features/upload/Upload"));
+const ProtectedRoute = lazy(() => import("./protect-route/protected-route"));
+const HomeLandingPage = lazy(() => import("../../components/home/home"));
 
 const routesConfig = {
+  HOME: {
+    key: nanoid(),
+    path: appRoutes.HOME, 
+    element:  <HomeLandingPage />,
+  },
   MAIN: {
     key: nanoid(),
     path: appRoutes.MAIN,
@@ -24,7 +34,7 @@ const routesConfig = {
     key: nanoid(),
     path: appRoutes.UPLOAD,
     element: (
-      <ProtectedRoute ifNoAuthGoTo={appRoutes.LOGIN}>
+      <ProtectedRoute redirectTo={appRoutes.LOGIN}>
         <UploadLandingPage />
       </ProtectedRoute>
     ),
@@ -33,7 +43,7 @@ const routesConfig = {
     key: nanoid(),
     path: appRoutes.EMPLOYEES,
     element: (
-      <ProtectedRoute ifNoAuthGoTo={appRoutes.LOGIN}>
+      <ProtectedRoute redirectTo={appRoutes.LOGIN}>
         <EmployeesLandingPage />
       </ProtectedRoute>
     ),
@@ -42,9 +52,9 @@ const routesConfig = {
     key: nanoid(),
     path: appRoutes.UNKNOWN,
     element: (
-      <ProtectedRoute ifNoAuthGoTo={appRoutes.LOGIN}>
-        <div>Landing Page Not Found!</div>
-      </ProtectedRoute>
+      <UnknowRoute redirectTo={appRoutes.EMPLOYEES}>
+        <HomeLandingPage />
+      </UnknowRoute>
     ),
   },
 };

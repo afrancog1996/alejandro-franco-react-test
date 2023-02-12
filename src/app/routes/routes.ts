@@ -1,7 +1,8 @@
 import { IAppRoutes } from "../../react-app-env";
 
 const appRoutes: IAppRoutes = {
-  MAIN: "/home",
+  MAIN: "/",
+  HOME: "/home",
   LOGIN: "/login",
   UPLOAD: "/upload",
   EMPLOYEES: "/employees",

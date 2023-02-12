@@ -9,6 +9,10 @@ const RouteRenderer = createHashRouter(
   createRoutesFromElements(
     <Route element={routesConfig.MAIN.element}>
       <Route
+        path={routesConfig.HOME.path}
+        element={routesConfig.HOME.element}
+      ></Route>
+      <Route
         path={routesConfig.EMPLOYEES.path}
         element={routesConfig.EMPLOYEES.element}
       ></Route>
