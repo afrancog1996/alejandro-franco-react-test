@@ -84,7 +84,7 @@ const LoginLandingPage = () => {
         </Grid>
         <Grid item width={500}>
           <FormControl variant="standard" fullWidth>
-            <InputLabel htmlFor="input-password">UserName</InputLabel>
+            <InputLabel htmlFor="input-password">Password</InputLabel>
             <Input
               id="input-password-adornment"
               name="pass"
