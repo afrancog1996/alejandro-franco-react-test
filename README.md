@@ -40,7 +40,7 @@ In the project directory, you can run:
 
 ## REACT_APP_USER_PASSWORD="YOUR_PASSWORD"
 
-## For the proper functioning of the false login and the protected routes of the project
+## For the proper functionality of the false login and the protected routes of the project
 
 ## -- `npm install`
 
