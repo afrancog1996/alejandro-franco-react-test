@@ -23,8 +23,6 @@ const LoginLandingPage = () => {
   const [formData, setFormData] = useState({ name: "", pass: "" });
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {}, [isAuth]);
-
   const handleClose = () => setOpen(false);
 
   const handleCopyPaste = (e: React.SyntheticEvent<EventTarget>) => {
@@ -46,6 +44,15 @@ const LoginLandingPage = () => {
     });
     e.preventDefault();
   };
+
+  useEffect(() => {
+    const createStorage = async () => {
+      const bucket: string[] = [];
+      localStorage.setItem("base64Strings", JSON.stringify(bucket));
+    };
+
+    createStorage();
+  }, []);
 
   return (
     <div>
@@ -109,8 +116,12 @@ const LoginLandingPage = () => {
         <Grid item width={500}>
           {isAuth !== "invalid" && (
             <FormControl variant="standard" fullWidth>
-              <Button onClick={() => dispatch(isLogingout())} variant="contained">
-                You are logged, do you want log out?
+              <Button
+                onClick={() => dispatch(isLogingout())}
+                variant="contained"
+              >
+                if you want to deactivate the auth status click on the
+                button
               </Button>
             </FormControl>
           )}

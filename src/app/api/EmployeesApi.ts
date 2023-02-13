@@ -16,7 +16,7 @@ export const EmployeeApi = createApi({
       query: (newEmployee: any) => ({
         url: "/alejandro_franco",
         method: "POST",
-        newEmployee,
+        body: newEmployee,
       }),
       invalidatesTags: [{ type: "Posts", id: "LIST" }],
     }),

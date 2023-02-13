@@ -13,7 +13,7 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow,
+  TableRow
 } from "@mui/material";
 import moment from "moment";
 import { useState } from "react";
@@ -24,13 +24,6 @@ interface Column {
   id: string;
   label?: string;
   minWidth: number;
-}
-
-interface Employees {
-  id: number;
-  name: string;
-  last_name: string;
-  birthday: number;
 }
 
 const columns: Column[] = [
@@ -53,10 +46,10 @@ const columns: Column[] = [
 
 const EmployeesLandingPage = () => {
   const { data, isError, isLoading } = useGetEmployeesQuery();
-  const [page, setPage] = useState(0);
-  const [searchvalue, setSearchValue] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [open, setOpen] = useState(false);
+  const [page, setPage] = useState<number>(0);
+  const [searchvalue, setSearchValue] = useState<string>("");
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

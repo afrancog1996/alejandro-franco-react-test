@@ -1,5 +1,5 @@
-import SendIcon from "@mui/icons-material/Send";
 import CancelIcon from "@mui/icons-material/Cancel";
+import SendIcon from "@mui/icons-material/Send";
 import {
   Button,
   FormControl,
@@ -7,27 +7,50 @@ import {
   Input,
   InputLabel,
   Modal,
-  TextField,
+  TextField
 } from "@mui/material";
-import { useState } from "react";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { DatePicker } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import moment, { Moment } from "moment";
+import { useState } from "react";
+import { useSetEmployeeMutation } from "../../app/api/EmployeesApi";
 
 const ModalEmployee = (props: any) => {
-  const [formData, setFormData] = useState({ name: "", pass: "",  });
-  const [value, setValue] = useState<Moment | null>(moment("2022-04-07"));
+  const [setEmployee] = useSetEmployeeMutation();
+
+  const [formData, setFormData] = useState<any>({
+    name: "",
+    last_name: "",
+    birthday: "",
+  });
+
+  const [dateValue, setDateValue] = useState<Moment | null>(
+    moment("2022-04-07")
+  );
+
   const handleClose = () => props.setOpen(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
+    setFormData((prev: any) => ({
       ...prev,
       [e.target?.name]: e.target?.value,
     }));
   };
 
   const handleClick = (e: React.SyntheticEvent<EventTarget>) => {
+    const birthday_date = moment(dateValue).format("YYYY/MM/DD");
+
+    const dataToSend = {
+      name: formData.name,
+      last_name: formData.last_name,
+      birthday: birthday_date,
+    };
+
+    setEmployee(dataToSend).then((res) => {
+      console.log(res);
+    });
+
     e.preventDefault();
   };
 
@@ -59,7 +82,7 @@ const ModalEmployee = (props: any) => {
       >
         <Grid item width={"50%"}>
           <FormControl variant="standard" fullWidth>
-            <InputLabel htmlFor="input-user-name">UserName</InputLabel>
+            <InputLabel htmlFor="input-user-name">Name: </InputLabel>
             <Input
               id="input-user-name-adornment"
               name="name"
@@ -70,12 +93,12 @@ const ModalEmployee = (props: any) => {
         </Grid>
         <Grid item width={"50%"}>
           <FormControl variant="standard" fullWidth>
-            <InputLabel htmlFor="input-password">UserName</InputLabel>
+            <InputLabel htmlFor="input-password">Last Name: </InputLabel>
             <Input
               id="input-password-adornment"
-              name="pass"
+              name="last_name"
               onChange={handleChange}
-              value={formData?.pass}
+              value={formData?.last_name}
             />
           </FormControl>
         </Grid>
@@ -84,12 +107,12 @@ const ModalEmployee = (props: any) => {
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <DatePicker
                 disableFuture
-                label="Responsive"
+                label="Birthday"
                 openTo="year"
                 views={["year", "month", "day"]}
-                value={value}
+                value={dateValue}
                 onChange={(newValue) => {
-                  setValue(newValue);
+                  setDateValue(newValue);
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
@@ -101,7 +124,7 @@ const ModalEmployee = (props: any) => {
             <Button
               onClick={handleClick}
               variant="contained"
-              disabled={!formData.name || !formData.pass}
+              disabled={!formData.name || !formData.last_name || !dateValue}
               endIcon={<SendIcon />}
             >
               Send
