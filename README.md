@@ -2,6 +2,7 @@
 
     - Pending unit test
     - The saving of images and their listing is still pending
+    - Some sections of the website are not responsive at all
 
 All points for personal reasons it was not possible to complete it.
 
