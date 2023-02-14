@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const pages = [
   { key: 1, routeName: "Home", routerLink: "/home" },
@@ -20,14 +20,19 @@ const pages = [
 ];
 
 const HeaderAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event: any) => {
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (route: string) => {
     setAnchorElNav(null);
+    navigate("/some-route");
   };
 
   return (
@@ -83,18 +88,11 @@ const HeaderAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page?.key} onClick={handleCloseNavMenu}>
-                  <Typography
-                    to={page?.routerLink}
-                    component={Link}
-                    textAlign="center"
-                    sx={{
-                      color: "inherit",
-                      textDecoration: "none",
-                    }}
-                  >
-                    {page?.routeName}
-                  </Typography>
+                <MenuItem
+                  key={page?.key}
+                  onClick={() => handleCloseNavMenu(page?.routerLink)}
+                >
+                  <Typography textAlign="center">{page?.routeName}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -103,8 +101,8 @@ const HeaderAppBar = () => {
           <Typography
             variant="h5"
             noWrap
-            component={NavLink}
-            to={"/"}
+            component="a"
+            href=""
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -122,25 +120,10 @@ const HeaderAppBar = () => {
             {pages.map((page) => (
               <Button
                 key={page?.key}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "white",
-                  display: "block",
-                  textDecoration: "none",
-                }}
+                onClick={() => handleCloseNavMenu(page?.routerLink)}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
-                <Typography
-                  to={page?.routerLink}
-                  component={Link}
-                  textAlign="center"
-                  sx={{
-                    color: "inherit",
-                    textDecoration: "none",
-                  }}
-                >
-                  {page?.routeName}
-                </Typography>
+                {page?.routeName}
               </Button>
             ))}
           </Box>
@@ -148,5 +131,5 @@ const HeaderAppBar = () => {
       </Container>
     </AppBar>
   );
-}
+};
 export default HeaderAppBar;
