@@ -10,9 +10,9 @@ import {
   InputAdornment,
   InputLabel,
   Modal,
-  Typography,
+  Typography
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getCredentials, isLogingout, selectAuth } from "./LoginSlice";
 
@@ -44,7 +44,6 @@ const LoginLandingPage = () => {
     });
     e.preventDefault();
   };
-
 
   return (
     <div>
@@ -112,8 +111,7 @@ const LoginLandingPage = () => {
                 onClick={() => dispatch(isLogingout())}
                 variant="contained"
               >
-                if you want to deactivate the auth status click on the
-                button
+                if you want to deactivate the auth status click on the button
               </Button>
             </FormControl>
           )}
