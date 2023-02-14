@@ -44,11 +44,13 @@ In the project directory, you can run:
 - The proyect has two environments `development` and `production`
 - Modify the configuration files `.env.dev` and `.env.prod` on root path.
 
-## REACT_APP_USER_NAME="YOUR_NAME"
+## Update env files
 
-## REACT_APP_USER_PASSWORD="YOUR_PASSWORD"
+- REACT_APP_USER_NAME="YOUR_NAME"
 
-## For the proper functionality of the false login and the protected routes of the project
+- REACT_APP_USER_PASSWORD="YOUR_PASSWORD"
+
+For the proper functionality of the ake login and the protected routes of the    project
 
 ## -- `npm install`
 
