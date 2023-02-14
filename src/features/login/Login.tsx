@@ -45,14 +45,6 @@ const LoginLandingPage = () => {
     e.preventDefault();
   };
 
-  useEffect(() => {
-    const createStorage = async () => {
-      const bucket: string[] = [];
-      localStorage.setItem("base64Strings", JSON.stringify(bucket));
-    };
-
-    createStorage();
-  }, []);
 
   return (
     <div>

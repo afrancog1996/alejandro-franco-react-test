@@ -1,10 +1,18 @@
 /// <reference types="react-scripts" />
 
-export interface IAppRoutes {
+interface IAppRoutes {
   [route: string]: string;
 }
 
-export interface ISrc {
+interface ISrc {
   img: string;
   title: string;
 }
+
+interface IEmployee {
+  name: string;
+  last_name: string;
+  birthday: string | number;
+}
+
+export { IEmployee, ISrc, IAppRoutes };

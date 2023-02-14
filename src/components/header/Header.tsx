@@ -32,7 +32,7 @@ const HeaderAppBar = () => {
 
   const handleCloseNavMenu = (route: string) => {
     setAnchorElNav(null);
-    navigate("/some-route");
+    navigate(route);
   };
 
   return (
