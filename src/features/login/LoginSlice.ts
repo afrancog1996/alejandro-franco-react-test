@@ -4,11 +4,10 @@ import { fetchAcountData } from "./LoginApi";
 
 interface ILoginState {
   isAuth: "valid" | "invalid";
-
 }
 
 const initialState: ILoginState = {
-  isAuth: "valid",
+  isAuth: "invalid",
 };
 
 export const getCredentials = createAsyncThunk(
@@ -35,14 +34,9 @@ export const loginSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getCredentials.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.isAuth = "valid";
-        } else {
-          state.isAuth = "invalid";
-        }
-      })
+    builder.addCase(getCredentials.fulfilled, (state, action) => {
+      state.isAuth = "valid";
+    });
   },
 });
 
